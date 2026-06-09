@@ -231,7 +231,6 @@ const SingleScreenshotSection = () => {
           >
             <img 
               src="/assets/d1.jpg" 
-              onError={(e) => { e.currentTarget.src = "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?q=80&w=1000&auto=format&fit=crop" }}
               alt="d1" 
               className="w-full aspect-[9/16] object-cover bg-black/5"
             />
@@ -267,7 +266,6 @@ const EndedHereSection = () => {
         >
           <img 
             src="/assets/d2.jpg" 
-            onError={(e) => { e.currentTarget.src = "https://images.unsplash.com/photo-1518155317743-a8ff43ca6a5f?q=80&w=1000&auto=format&fit=crop" }}
             alt="d2" 
             className="w-full aspect-[9/16] object-cover bg-[#1c1c1c]"
           />
@@ -447,7 +445,6 @@ Oh, we don't talk anymore like we used to do`;
             >
               <img 
                 src="/assets/f1.jpg" 
-                onError={(e) => { e.currentTarget.src = "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=2000&auto=format&fit=crop" }}
                 alt="House of Memories" 
                 className="w-full h-auto max-h-[70vh] object-cover aspect-square md:aspect-video"
               />
@@ -540,7 +537,6 @@ Oh, we don't talk anymore like we used to do`;
               <div className="w-full max-w-[320px] sm:max-w-[400px]">
                 <img 
                   src="/assets/s1.jpg" 
-                  onError={(e) => { e.currentTarget.src = "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1000&auto=format&fit=crop" }}
                   alt="s1" 
                   className="w-full aspect-[9/16] object-cover bg-black/5 shadow-2xl"
                 />
@@ -552,7 +548,6 @@ Oh, we don't talk anymore like we used to do`;
               <div className="w-full max-w-[320px] sm:max-w-[400px]">
                 <img 
                   src="/assets/s2.jpg" 
-                  onError={(e) => { e.currentTarget.src = "https://images.unsplash.com/photo-1551651639-927b595f815c?q=80&w=1000&auto=format&fit=crop" }}
                   alt="s2" 
                   className="w-full aspect-[9/16] object-cover bg-black/5 shadow-2xl"
                 />
