@@ -1,0 +1,6 @@
+{
+  "name": "House of Memories",
+  "description": "A visually elegant animated page showcasing 'House of Memories'.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
