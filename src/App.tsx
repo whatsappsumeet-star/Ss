@@ -16,6 +16,33 @@ const Word = ({ children, progress, range }: { children: string, progress: Motio
   );
 };
 
+const ScrollWord = ({ word, progress, range }: { word: string, progress: MotionValue<number>, range: [number, number], key?: string | number }) => {
+  const center = (range[0] + range[1]) / 2;
+  const step = Math.max(0.1, (range[1] - range[0]) * 1.5);
+
+  const scale = useTransform(progress,
+     [Math.max(0, center - step), center, Math.min(1, center + step)],
+     [0.75, 1.25, 0.75]
+  );
+  const opacity = useTransform(progress,
+     [Math.max(0, center - step), center, Math.min(1, center + step)],
+     [0.15, 1, 0.15]
+  );
+  const color = useTransform(progress,
+     [Math.max(0, center - step), center, Math.min(1, center + step)],
+     ["#141414", "#5ba5ef", "#141414"]
+  );
+
+  return (
+    <motion.span 
+      style={{ scale, opacity, color, display: 'inline-block', originX: 0, originY: 0.5 }} 
+      className="mr-3 sm:mr-4 md:mr-6 lg:mr-8 mb-4 leading-tight origin-left"
+    >
+      {word}
+    </motion.span>
+  );
+};
+
 const phrases = [
   { text: "Mar khaoge", count: "7" },
   { text: "Bye", count: "5" },
@@ -332,33 +359,130 @@ const SlidingCurveSection = () => {
     offset: ["start end", "end end"]
   });
 
-  const curveX = useTransform(scrollYProgress, [0, 1], ["40vw", "-100%"]);
+  const curveX = useTransform(scrollYProgress, [0, 1], ["40vw", "-80%"]);
 
   return (
     <div ref={containerRef} className="h-[800vh] bg-[#f46542] relative w-full">
       <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
         <motion.div 
           style={{ x: curveX }} 
-          className="absolute left-0 flex items-center w-[5000px] lg:w-[7000px] h-[800px]"
+          className="absolute left-0 flex items-center w-[3500px] lg:w-[4500px] h-[800px]"
         >
            <svg 
              className="w-full h-full overflow-visible"
-             viewBox="0 0 7000 800"
+             viewBox="0 0 4500 800"
            >
              <path 
                id="sliding-curve"
-               d="M 0 400 Q 1750 0 3500 400 T 7000 400" 
+               d="M 0 400 Q 1125 0 2250 400 T 4500 400" 
                fill="transparent" 
                stroke="#141414" 
                strokeWidth="10" 
              />
-             <text className="font-sans font-black text-[3.5rem] sm:text-[5rem] lg:text-[7rem] fill-[#fdda33] uppercase tracking-normal" dy="-30" style={{ wordSpacing: '0.3em' }}>
+             <text className="font-sans font-black text-[3.5rem] sm:text-[5rem] lg:text-[6.5rem] fill-[#fdda33] uppercase tracking-normal" dy="-30" style={{ wordSpacing: '0.3em' }}>
                <textPath href="#sliding-curve" startOffset="10%" textAnchor="start">
                  I know you got too much from everyone even from me
                </textPath>
              </text>
            </svg>
         </motion.div>
+      </div>
+    </div>
+  );
+};
+
+const ScrollTextSection = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"]
+  });
+
+  const rawText = "You are stepping back to protect your self that's completely okay I used to do the same, you cared about me that night and listened. You are a amazing person.";
+  const words = rawText.split(" ");
+
+  return (
+    <div ref={containerRef} className="h-[300vh] bg-[#f5f0e6] relative w-full pt-[10vh] pb-[10vh]">
+       <div className="sticky top-0 h-screen w-full flex items-center justify-center px-6 sm:px-12 md:px-24 overflow-hidden">
+         <div className="max-w-6xl flex flex-wrap justify-start items-center font-mono text-[2rem] sm:text-[3rem] md:text-[4rem] lg:text-[5.5rem] uppercase font-bold text-[#141414]">
+           {words.map((word, i) => {
+             const start = i / words.length;
+             const end = start + (1 / words.length);
+             return <ScrollWord key={i} word={word} progress={scrollYProgress} range={[start, end]} />
+           })}
+         </div>
+       </div>
+    </div>
+  )
+}
+
+const DiagonalStripsSection = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  const strip1X = useTransform(scrollYProgress, [0, 0.2, 0.45, 0.55, 1], ["-100vw", "0vw", "5vw", "-150vw", "-150vw"]);
+  const strip1Y = useTransform(scrollYProgress, [0, 0.2, 0.45, 0.55, 1], ["-100vh", "-10vh", "-15vh", "-100vh", "-100vh"]);
+
+  const strip2X = useTransform(scrollYProgress, [0.1, 0.3, 0.5, 0.6, 1], ["100vw", "0vw", "-5vw", "150vw", "150vw"]);
+  const strip2Y = useTransform(scrollYProgress, [0.1, 0.3, 0.5, 0.6, 1], ["100vh", "10vh", "5vh", "100vh", "100vh"]);
+
+  const stripsOpacity = useTransform(scrollYProgress, [0, 0.45, 0.55, 1], [1, 1, 0, 0]);
+
+  const word1Opacity = useTransform(scrollYProgress, [0, 0.55, 0.6, 0.65, 0.7, 1], [0, 0, 1, 1, 0, 0]);
+  const word1Scale = useTransform(scrollYProgress, [0, 0.55, 0.7, 1], [0.5, 0.5, 1.5, 1.5]);
+
+  const word2Opacity = useTransform(scrollYProgress, [0, 0.68, 0.73, 0.78, 0.83, 1], [0, 0, 1, 1, 0, 0]);
+  const word2Scale = useTransform(scrollYProgress, [0, 0.68, 0.83, 1], [0.5, 0.5, 1.5, 1.5]);
+
+  const word3Opacity = useTransform(scrollYProgress, [0, 0.81, 0.86, 1], [0, 0, 1, 1]);
+  const word3Scale = useTransform(scrollYProgress, [0, 0.81, 1], [0.5, 0.5, 1.2]);
+
+  return (
+    <div ref={containerRef} className="h-[600vh] bg-[#5ba5ef] relative w-full">
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
+        
+        <motion.div style={{ opacity: stripsOpacity }} className="absolute inset-0 pointer-events-none z-10 w-full h-full">
+          {/* Strip 1 Wrapper */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <motion.div 
+              style={{ x: strip1X, y: strip1Y, rotate: -10 }}
+              className="bg-[#141414] text-[#f5f0e6] w-[150vw] sm:w-[120vw] py-8 sm:py-12 z-10 flex justify-center shadow-[0_30px_60px_rgba(0,0,0,0.4)] pointer-events-auto"
+            >
+               <p className="font-mono text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold uppercase text-center max-w-[80vw] sm:max-w-5xl mx-auto tracking-tight leading-snug">
+                 I really don't want to hurt you that day, I removed you from friend list, I am sorry
+               </p>
+            </motion.div>
+          </div>
+
+          {/* Strip 2 Wrapper */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <motion.div 
+              style={{ x: strip2X, y: strip2Y, rotate: 6 }}
+              className="bg-[#fad335] text-[#141414] w-[150vw] sm:w-[120vw] py-8 sm:py-12 z-20 flex justify-center shadow-[0_30px_60px_rgba(0,0,0,0.3)] pointer-events-auto"
+            >
+               <p className="font-sans font-black text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl uppercase text-center max-w-[90vw] sm:max-w-6xl mx-auto tracking-tighter leading-none">
+                 If you are comfortable let's be good friends this was a small speed breaker and this isn't from loyan
+               </p>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Words Container */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-30">
+          <motion.div style={{ opacity: word1Opacity, scale: word1Scale }} className="absolute text-center flex items-center justify-center">
+            <h2 className="font-sans font-black text-[5rem] sm:text-7xl md:text-9xl lg:text-[12rem] text-[#f5f0e6] uppercase tracking-tighter drop-shadow-md">It's</h2>
+          </motion.div>
+          <motion.div style={{ opacity: word2Opacity, scale: word2Scale }} className="absolute text-center flex items-center justify-center">
+            <h2 className="font-sans font-black text-[5rem] sm:text-7xl md:text-9xl lg:text-[12rem] text-[#fad335] uppercase tracking-tighter drop-shadow-md">from</h2>
+          </motion.div>
+          <motion.div style={{ opacity: word3Opacity, scale: word3Scale }} className="absolute text-center flex items-center justify-center">
+            <h2 className="font-sans font-black text-[5rem] sm:text-7xl md:text-[9rem] lg:text-[12rem] xl:text-[14rem] text-[#141414] uppercase tracking-tighter drop-shadow-2xl whitespace-nowrap">Billota 😾</h2>
+          </motion.div>
+        </div>
+
       </div>
     </div>
   );
@@ -567,6 +691,10 @@ Oh, we don't talk anymore like we used to do`;
       <ListenSection />
 
       <SlidingCurveSection />
+
+      <ScrollTextSection />
+
+      <DiagonalStripsSection />
     </div>
   );
 }
