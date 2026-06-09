@@ -44,19 +44,19 @@ const ScrollWord = ({ word, progress, range }: { word: string, progress: MotionV
 };
 
 const phrases = [
-  { text: "Mar khaoge", count: "7" },
-  { text: "Bye", count: "5" },
-  { text: "Sorry", count: "5" },
-  { text: "Sent good\ncats videos", count: "∞" },
-  { text: "Acha", count: "50" },
-  { text: "Pata nhi", count: "8" },
-  { text: "Kuch nhi", count: "12" },
-  { text: "Koi ni", count: "9" },
+  { text: "Mar khaoge", count: "9" },
+  { text: "Bye", count: "11" },
+  { text: "Sorry", count: "22" },
+  { text: "Sent good\nca3s videos", count: "∞" },
+  { text: "Acha", count: "214" },
+  { text: "Pata nhi", count: "22" },
+  { text: "Kuch nhi", count: "21" },
+  { text: "Koi ni", count: "27" },
   { text: "Ghanta", count: "15" },
-  { text: "Bolo na\nkya hua", count: "2" },
-  { text: "Good night", count: "27" },
-  { text: "Good meowrning", count: "29" },
-  { text: "Kider ho", count: "6" }
+  { text: "Bolo na\nkya hua", count: "3" },
+  { text: "Good night", count: "56" },
+  { text: "Good meowrning", count: "60" },
+  { text: "Kider ho", count: "10" }
 ];
 
 const PinnedBox = ({ item, index }: { item: { text: string, count: string }, index: number, key?: string | number }) => {
@@ -178,11 +178,11 @@ const ChatToMusicSection = () => {
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-widest text-[#005cff] mb-4 font-bold w-full text-center">90s Playlist</div>
           
           <div className="w-full aspect-square bg-[#141414] rounded-2xl overflow-hidden mb-5 relative shadow-inner">
-             <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=800&auto=format&fit=crop" className="w-full h-full object-cover opacity-90" alt="Album Cover" />
+             <img src="/m1.jpg" className="w-full h-full object-cover opacity-90" alt="Album Cover" />
           </div>
 
           <div className="w-full mb-4 font-mono text-center">
-            <h3 className="text-2xl sm:text-3xl font-bold mb-1 tracking-tight">XYZ</h3>
+            <h3 className="text-2xl sm:text-3xl font-bold mb-1 tracking-tight">Ijazat</h3>
             <p className="text-gray-400 text-sm">Various Artists</p>
           </div>
 
@@ -206,8 +206,8 @@ const ChatToMusicSection = () => {
 
           <div className="w-full bg-[#f4ebd0] rounded-xl p-3 flex items-center gap-3">
              <div className="flex -space-x-2">
-                <img className="w-8 h-8 rounded-full border-[2px] border-[#f4ebd0] object-cover object-center bg-gray-200" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop" alt="User 1" />
-                <img className="w-8 h-8 rounded-full border-[2px] border-[#f4ebd0] object-cover object-center bg-gray-200" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=200&auto=format&fit=crop" alt="User 2"/>
+                <img className="w-8 h-8 rounded-full border-[2px] border-[#f4ebd0] object-cover object-center bg-gray-200" src="/p1.jpg" alt="User 1" />
+                <img className="w-8 h-8 rounded-full border-[2px] border-[#f4ebd0] object-cover object-center bg-gray-200" src="/p2.jpg" alt="User 2"/>
              </div>
              <div className="font-mono">
                <div className="text-[9px] sm:text-[10px] text-[#005cff] uppercase tracking-wider font-bold mb-0.5">Listening together</div>
@@ -381,7 +381,7 @@ const SlidingCurveSection = () => {
              />
              <text className="font-sans font-black text-[3.5rem] sm:text-[5rem] lg:text-[6.5rem] fill-[#fdda33] uppercase tracking-normal" dy="-30" style={{ wordSpacing: '0.3em' }}>
                <textPath href="#sliding-curve" startOffset="10%" textAnchor="start">
-                 I know you got too much from everyone even from me
+                 I know you got hurt from ever close one even from me
                </textPath>
              </text>
            </svg>
@@ -674,6 +674,9 @@ Oh, we don't talk anymore like we used to do`;
       {/* Pinned Stats Section */}
       <div className="bg-[#ccabf7] text-[#141414] pt-24 sm:pt-32 pb-32 sm:pb-48 w-full relative overflow-hidden">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 xl:px-16">
+          <h2 className="font-sans font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase text-center mb-16 sm:mb-24 tracking-tighter">
+            Word count upto 12 Feburary
+          </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-16 gap-x-8 sm:gap-x-12">
             {phrases.map((item, index) => (
               <PinnedBox key={index} item={item} index={index} />
