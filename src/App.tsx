@@ -175,7 +175,7 @@ const ChatToMusicSection = () => {
           style={{ opacity: musicOpacity, y: musicY }}
           className="absolute w-full max-w-[320px] flex flex-col items-center bg-white p-5 rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1)]"
         >
-          <div className="text-[10px] sm:text-xs font-mono uppercase tracking-widest text-[#005cff] mb-4 font-bold w-full text-center">90s Playlist</div>
+          <div className="text-[10px] sm:text-xs font-mono uppercase tracking-widest text-[#005cff] mb-4 font-bold w-full text-center">Billota playlist</div>
           
           <div className="w-full aspect-square bg-[#141414] rounded-2xl overflow-hidden mb-5 relative shadow-inner">
              <img src="/m1.jpg" className="w-full h-full object-cover opacity-90" alt="Album Cover" />
@@ -423,25 +423,28 @@ const DiagonalStripsSection = () => {
     offset: ["start start", "end end"]
   });
 
-  const strip1X = useTransform(scrollYProgress, [0, 0.2, 0.45, 0.55, 1], ["-100vw", "0vw", "5vw", "-150vw", "-150vw"]);
-  const strip1Y = useTransform(scrollYProgress, [0, 0.2, 0.45, 0.55, 1], ["-100vh", "-10vh", "-15vh", "-100vh", "-100vh"]);
+  const strip1X = useTransform(scrollYProgress, [0, 0.15, 0.35, 0.45, 1], ["-100vw", "0vw", "5vw", "-150vw", "-150vw"]);
+  const strip1Y = useTransform(scrollYProgress, [0, 0.15, 0.35, 0.45, 1], ["-100vh", "-10vh", "-15vh", "-100vh", "-100vh"]);
 
-  const strip2X = useTransform(scrollYProgress, [0.1, 0.3, 0.5, 0.6, 1], ["100vw", "0vw", "-5vw", "150vw", "150vw"]);
-  const strip2Y = useTransform(scrollYProgress, [0.1, 0.3, 0.5, 0.6, 1], ["100vh", "10vh", "5vh", "100vh", "100vh"]);
+  const strip2X = useTransform(scrollYProgress, [0.08, 0.25, 0.4, 0.48, 1], ["100vw", "0vw", "-5vw", "150vw", "150vw"]);
+  const strip2Y = useTransform(scrollYProgress, [0.08, 0.25, 0.4, 0.48, 1], ["100vh", "10vh", "5vh", "100vh", "100vh"]);
 
-  const stripsOpacity = useTransform(scrollYProgress, [0, 0.45, 0.55, 1], [1, 1, 0, 0]);
+  const stripsOpacity = useTransform(scrollYProgress, [0, 0.35, 0.45, 1], [1, 1, 0, 0]);
 
-  const word1Opacity = useTransform(scrollYProgress, [0, 0.55, 0.6, 0.65, 0.7, 1], [0, 0, 1, 1, 0, 0]);
-  const word1Scale = useTransform(scrollYProgress, [0, 0.55, 0.7, 1], [0.5, 0.5, 1.5, 1.5]);
+  const word1Opacity = useTransform(scrollYProgress, [0, 0.45, 0.5, 0.55, 0.6, 1], [0, 0, 1, 1, 0, 0]);
+  const word1Scale = useTransform(scrollYProgress, [0, 0.45, 0.6, 1], [0.5, 0.5, 1.5, 1.5]);
 
-  const word2Opacity = useTransform(scrollYProgress, [0, 0.68, 0.73, 0.78, 0.83, 1], [0, 0, 1, 1, 0, 0]);
-  const word2Scale = useTransform(scrollYProgress, [0, 0.68, 0.83, 1], [0.5, 0.5, 1.5, 1.5]);
+  const word2Opacity = useTransform(scrollYProgress, [0, 0.58, 0.63, 0.68, 0.73, 1], [0, 0, 1, 1, 0, 0]);
+  const word2Scale = useTransform(scrollYProgress, [0, 0.58, 0.73, 1], [0.5, 0.5, 1.5, 1.5]);
 
-  const word3Opacity = useTransform(scrollYProgress, [0, 0.81, 0.86, 1], [0, 0, 1, 1]);
-  const word3Scale = useTransform(scrollYProgress, [0, 0.81, 1], [0.5, 0.5, 1.2]);
+  const word3Opacity = useTransform(scrollYProgress, [0, 0.71, 0.76, 0.81, 0.86, 1], [0, 0, 1, 1, 0, 0]);
+  const word3Scale = useTransform(scrollYProgress, [0, 0.71, 0.86, 1], [0.5, 0.5, 1.2, 1.2]);
+
+  const word4Opacity = useTransform(scrollYProgress, [0, 0.84, 0.89, 1], [0, 0, 1, 1]);
+  const word4Scale = useTransform(scrollYProgress, [0, 0.84, 1], [0.8, 0.8, 1]);
 
   return (
-    <div ref={containerRef} className="h-[600vh] bg-[#5ba5ef] relative w-full">
+    <div ref={containerRef} className="h-[800vh] bg-[#5ba5ef] relative w-full">
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         
         <motion.div style={{ opacity: stripsOpacity }} className="absolute inset-0 pointer-events-none z-10 w-full h-full">
@@ -480,6 +483,9 @@ const DiagonalStripsSection = () => {
           </motion.div>
           <motion.div style={{ opacity: word3Opacity, scale: word3Scale }} className="absolute text-center flex items-center justify-center">
             <h2 className="font-sans font-black text-[5rem] sm:text-7xl md:text-[9rem] lg:text-[12rem] xl:text-[14rem] text-[#141414] uppercase tracking-tighter drop-shadow-2xl whitespace-nowrap">Billota 😾</h2>
+          </motion.div>
+          <motion.div style={{ opacity: word4Opacity, scale: word4Scale }} className="absolute text-center flex items-center justify-center w-full px-4">
+            <h2 className="font-sans font-black text-[3rem] sm:text-[4rem] md:text-[6rem] lg:text-[8rem] text-white uppercase tracking-tighter drop-shadow-xl leading-none text-center">Happy birthday<br/>in advance<br/><span className="text-[#fad335]">Billoti 😸</span></h2>
           </motion.div>
         </div>
 
