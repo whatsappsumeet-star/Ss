@@ -3,8 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { motion, useScroll, useTransform, useSpring, MotionValue, useMotionValueEvent } from 'motion/react';
-import { useRef } from 'react';
+import { motion, useScroll, useTransform, useSpring, MotionValue, useMotionValueEvent, AnimatePresence } from 'motion/react';
+import { useRef, useState, useEffect } from 'react';
 
 const Word = ({ children, progress, range }: { children: string, progress: MotionValue<number>, range: [number, number], key?: string | number }) => {
   const opacity = useTransform(progress, range, [0.3, 1]);
@@ -495,6 +495,27 @@ const DiagonalStripsSection = () => {
 };
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500);
+    
+    if (isLoading) {
+      document.body.style.overflow = 'hidden';
+      // Force scroll to top on load
+      window.scrollTo(0, 0);
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      clearTimeout(timer);
+      document.body.style.overflow = '';
+    };
+  }, [isLoading]);
+
   const apologyRef = useRef<HTMLDivElement>(null);
   const lyricsContainerRef = useRef<HTMLDivElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -542,8 +563,35 @@ Oh, we don't talk anymore like we used to do`;
   let wordIndex = 0;
 
   return (
-    <div className="bg-[#f3eee5] text-[#141414] font-mono selection:bg-[#fe652f] selection:text-white">
-      {/* Hero Section */}
+    <div className="bg-[#f3eee5] text-[#141414] font-mono selection:bg-[#fe652f] selection:text-white min-h-screen relative">
+      <AnimatePresence>
+        {isLoading && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="fixed inset-0 z-[9999] bg-[#f3eee5] flex flex-col items-center justify-center pointer-events-none"
+          >
+            <motion.div 
+              animate={{ 
+                scale: [1, 1.2, 1],
+                opacity: [0.5, 1, 0.5] 
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="text-4xl sm:text-6xl md:text-8xl font-black uppercase tracking-tighter text-[#141414] drop-shadow-sm flex items-center gap-4"
+            >
+              Loading <span className="text-[#fe652f] animate-pulse">😼</span>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className={`transition-opacity duration-1000 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
+        {/* Hero Section */}
       <div className="min-h-screen flex flex-col pt-16 md:pt-28 px-4 sm:px-8 pb-32">
         <div className="w-full max-w-6xl mx-auto flex flex-col">
           <h1 className="font-mono text-[17vw] sm:text-[14vw] md:text-[8rem] lg:text-[11rem] font-bold uppercase leading-[0.85] tracking-tighter sm:tracking-tight mb-4 md:mb-8 whitespace-nowrap">
@@ -704,6 +752,7 @@ Oh, we don't talk anymore like we used to do`;
       <ScrollTextSection />
 
       <DiagonalStripsSection />
+      </div>
     </div>
   );
 }
