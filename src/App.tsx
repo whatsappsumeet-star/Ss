@@ -178,7 +178,7 @@ const ChatToMusicSection = () => {
           <div className="text-[10px] sm:text-xs font-mono uppercase tracking-widest text-[#005cff] mb-4 font-bold w-full text-center">Billota playlist</div>
           
           <div className="w-full aspect-square bg-[#141414] rounded-2xl overflow-hidden mb-5 relative shadow-inner">
-             <img src="/m1.jpg" className="w-full h-full object-cover opacity-90" alt="Album Cover" />
+             <img src="/assets/m1.jpg" className="w-full h-full object-cover opacity-90" alt="Album Cover" />
           </div>
 
           <div className="w-full mb-4 font-mono text-center">
@@ -206,8 +206,8 @@ const ChatToMusicSection = () => {
 
           <div className="w-full bg-[#f4ebd0] rounded-xl p-3 flex items-center gap-3">
              <div className="flex -space-x-2">
-                <img className="w-8 h-8 rounded-full border-[2px] border-[#f4ebd0] object-cover object-center bg-gray-200" src="/p1.jpg" alt="User 1" />
-                <img className="w-8 h-8 rounded-full border-[2px] border-[#f4ebd0] object-cover object-center bg-gray-200" src="/p2.jpg" alt="User 2"/>
+                <img className="w-8 h-8 rounded-full border-[2px] border-[#f4ebd0] object-cover object-center bg-gray-200" src="/assets/p1.jpg" alt="User 1" />
+                <img className="w-8 h-8 rounded-full border-[2px] border-[#f4ebd0] object-cover object-center bg-gray-200" src="/assets/p2.jpg" alt="User 2"/>
              </div>
              <div className="font-mono">
                <div className="text-[9px] sm:text-[10px] text-[#005cff] uppercase tracking-wider font-bold mb-0.5">Listening together</div>
