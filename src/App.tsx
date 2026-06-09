@@ -397,7 +397,7 @@ export default function App() {
     offset: ["start start", "end end"]
   });
 
-  const sliderX = useTransform(sliderProgress, [0, 0.2, 0.8, 1], ["0%", "0%", "-50%", "-50%"]);
+  const sliderX = useTransform(sliderProgress, [0, 0.1, 0.9, 1], ["0%", "0%", "-87.5%", "-87.5%"]);
 
   const lyricsText = `We don't talk anymore, we don't talk
 anymore
@@ -526,34 +526,23 @@ Oh, we don't talk anymore like we used to do`;
       </div>
 
       {/* Yellow Screenshot Canvas Section */}
-      <div ref={sliderRef} className="h-[300vh] bg-[#fad335] text-[#141414] relative w-full">
+      <div ref={sliderRef} className="h-[500vh] bg-[#fad335] text-[#141414] relative w-full">
         <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden w-full">
           <motion.div 
-            className="flex w-[200vw]"
+            className="flex w-[800vw]"
             style={{ x: sliderX }}
           >
-            {/* s1.jpg container */}
-            <div className="w-screen shrink-0 flex justify-center items-center px-4">
-              <div className="w-full max-w-[320px] sm:max-w-[400px]">
-                <img 
-                  src="/assets/s1.jpg" 
-                  alt="s1" 
-                  className="w-full aspect-[9/16] object-cover bg-black/5 shadow-2xl"
-                />
+            {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
+              <div key={num} className="w-screen shrink-0 flex justify-center items-center px-4">
+                <div className="w-full max-w-[320px] sm:max-w-[400px]">
+                  <img 
+                    src={`/assets/s${num}.jpg`} 
+                    alt={`s${num}`} 
+                    className="w-full aspect-[9/16] object-cover bg-black/5 shadow-2xl"
+                  />
+                </div>
               </div>
-            </div>
-
-            {/* s2.jpg container */}
-            <div className="w-screen shrink-0 flex justify-center items-center px-4">
-              <div className="w-full max-w-[320px] sm:max-w-[400px]">
-                <img 
-                  src="/assets/s2.jpg" 
-                  alt="s2" 
-                  className="w-full aspect-[9/16] object-cover bg-black/5 shadow-2xl"
-                />
-              </div>
-            </div>
-
+            ))}
           </motion.div>
         </div>
       </div>
